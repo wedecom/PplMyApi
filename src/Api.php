@@ -128,7 +128,7 @@ class Api
             $this->securedStorage = $storage . '/Api';
         }
         try {
-            $this->soap = new \SoapClient($this->wsdl);
+            $this->soap = new \SoapClient($this->wsdl, ['trace' => 1]);
         } catch (\Exception $e) {
             throw new \Exception('Failed to build soap client');
         }
@@ -573,4 +573,10 @@ class Api
         user_error("getLabels is deprecated, use Label::generateLabels instead.", E_USER_DEPRECATED);
         return Label::generateLabels($packages, $decomposition);
     }
+
+
+    public function getSoap()
+	{
+		return $this->soap;
+	}
 }
